@@ -66,8 +66,8 @@ public class AdministradorController {
 			esta.setEstado(0);
 			admin.setEstado(esta);*/
 
-			seradm.guardar(adminf);
 			int cod=adminf.getCodigoAd();
+			seradm.guardar(adminf);
 			if(cod==0) {
 				
 				redirect.addFlashAttribute("MENSAJE","Registro exitoso");
