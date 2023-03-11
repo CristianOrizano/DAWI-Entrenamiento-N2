@@ -118,6 +118,8 @@ public class AdministradorController {
 		redirect.addFlashAttribute("MENSAJE","Eliminado exitoso");
 		int estado=0;
 		seradm.eliminar(estado,cod);
+		
+		System.out.println("segundo commit a entrena2");
 
 		return "redirect:/admin/lista";
 	}
