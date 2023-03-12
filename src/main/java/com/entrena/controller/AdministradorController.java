@@ -86,8 +86,8 @@ public class AdministradorController {
 	 @RequestMapping("/actualizar")
 	public String formActu(Model model,@RequestParam("cody") int cod) {
 		
+		 //buscar para actualizar
 		Administrador admi= seradm.BuscarAdmin(cod);
-		
 		
 		List<Ciudad> lista= serCiu.listCiuda();
 		
