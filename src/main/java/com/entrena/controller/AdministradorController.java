@@ -1,7 +1,10 @@
 package com.entrena.controller;
 
 
+import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.entrena.entity.Administrador;
@@ -59,7 +63,7 @@ public class AdministradorController {
 	}
 	
 	@RequestMapping("/registrar")
-	public String registrar(Model model,@ModelAttribute Administrador adminf,RedirectAttributes redirect){
+	public String registrar(Model model,@ModelAttribute Administrador adminf,RedirectAttributes redirect,@RequestParam(name = "img") MultipartFile imag ){
 	
 		try {
 			/*Estado esta= new Estado();
@@ -67,11 +71,22 @@ public class AdministradorController {
 			admin.setEstado(esta);*/
 
 			int cod=adminf.getCodigoAd();
-			seradm.guardar(adminf);
+			
 			if(cod==0) {
-				
+				if(imag.isEmpty()) {					
+					adminf.setNom_img("default.png");
+					seradm.guardar(adminf);
+				}else {	
+					saveimage(imag,adminf);	
+				}		
+				seradm.guardar(adminf);
 				redirect.addFlashAttribute("MENSAJE","Registro exitoso");
 			}else {
+				if(imag.isEmpty()) {									
+					seradm.guardar(adminf);
+				}else {	
+					saveimage(imag,adminf);
+				}
 				
 				redirect.addFlashAttribute("MENSAJE","Actualizado exitoso");
 			}
@@ -83,7 +98,23 @@ public class AdministradorController {
 		return "redirect:/admin/lista";
 	}
 	
-	 @RequestMapping("/actualizar")
+	public void saveimage(MultipartFile imag, Administrador adminf) throws IOException {
+		
+		
+		String nomArchivo = imag.getOriginalFilename();
+		//necesito los archivos de la img pero en byte(ya que las imagnes tienes byte)
+		byte[] bytes=imag.getBytes();
+		//
+		String ruta="C://ZClinica//DatosImg//";
+		//generar archivo
+		Files.write(Paths.get(ruta+nomArchivo), bytes);	
+		adminf.setNom_img(nomArchivo);
+		seradm.guardar(adminf);		
+		
+	}
+	
+	
+	/* @RequestMapping("/actualizar")
 	public String formActu(Model model,@RequestParam("cody") int cod) {
 		
 		 //buscar para actualizar
@@ -95,10 +126,10 @@ public class AdministradorController {
 		model.addAttribute("lisCiu",lista);
 		
 		return "PaginaRegistro";
-	} 
+	} */
 	
 	
-	/*@RequestMapping("/actualizar/{id}")
+	@RequestMapping("/actualizar/{id}")
 	public String formActu(Model model,@PathVariable(value="id") int cod) {
 		
 		Administrador admi= seradm.BuscarAdmin(cod);
@@ -110,7 +141,7 @@ public class AdministradorController {
 		model.addAttribute("lisCiu",lista);
 		
 		return "PaginaRegistro";
-	}  */
+	}  
 	
 	@RequestMapping("/eliminar")
 	public String formelimi(Model model,@RequestParam("codig") int cod,RedirectAttributes redirect) {

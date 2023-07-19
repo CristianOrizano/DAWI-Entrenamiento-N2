@@ -35,9 +35,6 @@
 			border: 1px solid red;
 			box-shadow: 0 0 0 0.2rem rgba(250, 16, 0, 0.18);
 		}
-		  body{
-				  background: #E5E7E9;
-			  }
 	
 		
 	</style>
@@ -46,7 +43,7 @@
      
 </head>
  <body class="sb-nav-fixed"> 
-        
+         <i class="fa-sharp fa-solid fa-circle-user"></i>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="##">Start Bootstrap</a>
@@ -78,12 +75,62 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Mantenimiento</div>
-                             <a class="nav-link text-white" th:href="@{/admin/lista}">
+                             <a class="nav-link" th:href="@{/admin/lista}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Administrador
                             </a>
-                          
-                            
+                            <div class="sb-sidenav-menu-heading">Interface</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Layouts
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="##">Static Navigation</a>
+                                    <a class="nav-link" href="##">Light Sidenav</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Pages
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Authentication
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="##">Login</a>
+                                            <a class="nav-link" href="##">Register</a>
+                                            <a class="nav-link" href="##">Forgot Password</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Error
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="##">401 Page</a>
+                                            <a class="nav-link" href="##">404 Page</a>
+                                            <a class="nav-link" href="##">500 Page</a>
+                                        </nav>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">Addons</div>
+                            <a class="nav-link" href="##">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Charts
+                            </a>
+                            <a class="nav-link" href="##">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Tables
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -99,19 +146,18 @@
    
                         <div class="row">                       
                         <div class="card mb-4">
-                            <div class="card-header"  style="background: #2271B6;">                         
-                                <h4 class="text-white"><i class="fas fa-table me-1"></i>Nuevo Registro </h4>
+                            <div class="card-header">                         
+                                <h2><i class="fas fa-table me-1"></i>Administrador </h2>
                             </div>
                             <div class="card-body">
 								<div class="row justify-content-center mt-3" >
 					<div class="col-sm-12 col-md-11 col-lg-10">
-					<div style="background: white;padding:15px;">
-					<form action="/admin/registrar" id="formAdmin" th:object="${admin}" method="post" enctype="multipart/form-data">
+					<div style="background: white;padding:15px;border: solid 15px orange;">
+					<form action="/admin/registrar" id="formAdmin" th:object="${admin}" method="post">
 						<div class="row mb-4">
 							<div class="col-sm-12 col-md-6 col-lg-4 form-group">				
 							<input type="text" name="codigo" th:field="*{codigoAd}" hidden class="form-control" >
 							<input type="text" th:field="*{estado.estado}" hidden class="form-control" >
-							<input type="text" th:field="*{nom_img}" hidden class="form-control" >
 							
 								<label for="formGroupExampleInput" class="form-label">Nombre</label>
 								<div class="input-group ">
@@ -177,13 +223,6 @@
 											        th:value="${ad.codigoCiu}"></option>
 								
 								</select>
-							</div>
-							<div class="col-sm-12 col-md-6 col-lg-4 form-group">
-								<label for="formGroupExampleInput" class="form-label">Imagen</label>
-								<div class="input-group ">
-								<span class="input-group-text" id="basic-addon1"><i class="fa-sharp fa-solid fa-money-bill"></i> </span>
-								<input type="file" name="img" class="form-control" id="formGroupExampleInput" placeholder="Ingrese Sueldo">
-								</div>
 							</div>
 					
 						</div>
@@ -339,14 +378,6 @@
     		 			}
     		 		}
                 },
-                
-                imgh: {
-     	    		validators:{
-    		 			notEmpty:{
-    		 				message:'Campo foto es obligatorio'
-    		 			}
-    		 		}
-                },
                 ciudad: {
      	    		validators:{
     		 			notEmpty:{
@@ -354,14 +385,14 @@
     		 			}
     		 		}
                 },
-                fechanaci: {					   
+                fecha: {					   
 					validators: {
 						notEmpty: {
 							message: 'Seleccione fecha '
 						},
 						date: {					
 						    format: 'YYYY-MM-DD',
-							message: 'el formato debe ser dd/mm/yyyy'
+							message: 'The format is dd/mm/yyyy'
 						},
 					}
 				},

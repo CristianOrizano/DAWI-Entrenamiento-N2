@@ -33,15 +33,14 @@ create table tb_Administrador
   fecha_nac date,
   cod_ciu char(5),
   estado int,
-  nom_img varchar(255),
   constraint fk_esta foreign key(estado) references tb_estado(estado),
   constraint fk_tbA foreign key(cod_ciu) references tb_Ciudad(cod_ciu)
 );
 alter table tb_Administrador auto_increment=1001;
-insert into tb_Administrador values(null,'cristian','Orizano Huyhua','los pinos',98456123,20,'Masculino',curdate(),'CI001',1,null);
-insert into tb_Administrador values(null,'cristian','Orizano momo','los pinos',98456123,300.31,'Masculino',curdate(),'CI001',1,null);
-insert into tb_Administrador values(null,'cristian','Orizano momo','los pinos',98456123,500.22,'Masculino','2020-08-16','CI001',1,null);
-insert into tb_Administrador values(null,'asaff','Orizano momo','los pinos',98456123,500.22,'Masculino','2020-08-16','CI001',1,null);
+insert into tb_Administrador values(null,'cristian','Orizano Huyhua','los pinos',98456123,20,'Masculino',curdate(),'CI001',1);
+insert into tb_Administrador values(null,'cristian','Orizano momo','los pinos',98456123,300.31,'Masculino',curdate(),'CI001',1);
+insert into tb_Administrador values(null,'cristian','Orizano momo','los pinos',98456123,500.22,'Masculino','2020-08-16','CI001',1);
+insert into tb_Administrador values(null,'asaff','Orizano momo','los pinos',98456123,500.22,'Masculino','2020-08-16','CI001',1);
 
 
 
@@ -49,3 +48,4 @@ insert into tb_Administrador values(null,'asaff','Orizano momo','los pinos',9845
 select * from  tb_estado;
 select * from tb_Administrador;
 select * from tb_Ciudad;
+

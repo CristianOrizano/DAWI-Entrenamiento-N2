@@ -36,6 +36,8 @@ public class Administrador {
 	
 	private String sexo;
 	
+	private String nom_img;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_nac")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -49,6 +51,14 @@ public class Administrador {
 	@JoinColumn(name="estado")
 	private Estado estado;
 	
+
+	public String getNom_img() {
+		return nom_img;
+	}
+
+	public void setNom_img(String nom_img) {
+		this.nom_img = nom_img;
+	}
 
 	public Estado getEstado() {
 		return estado;
